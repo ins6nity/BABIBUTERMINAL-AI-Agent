@@ -60,6 +60,11 @@ For more details, visit the **[Solana Agent Kit Repository](https://github.com/s
 - Libraries: `requests` and `tkinter` (pre-installed with Python).
 
 ### Installation
+**Note:** Installation is only required if you want to run the application locally. You can also use the AI Agent directly via Twitter by tagging: 
+```
+@BABIBUTERMINAL [LINK_REPO] [PROMPT]
+```
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/ins6nity/BABIBUTERMINAL-AI-Agent.git
