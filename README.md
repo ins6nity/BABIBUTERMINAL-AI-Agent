@@ -1,5 +1,8 @@
 # GitHub Repository Analyzer
 
+![GitHub Repository Analyzer](https://pbs.twimg.com/profile_banners/1866827999330332672/1734758028/1500x500)
+
+
 ## Overview
 The **GitHub Repository Analyzer** is a Python-based tool designed to analyze GitHub repositories and assess their reliability based on various metrics. It provides insights into repository activity, contributor engagement, and code quality, helping developers and teams determine whether a project is legitimate or potentially risky.
 
