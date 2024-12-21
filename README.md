@@ -4,7 +4,6 @@
 The **GitHub Repository Analyzer** is a Python-based tool designed to analyze GitHub repositories and assess their reliability based on various metrics. It provides insights into repository activity, contributor engagement, and code quality, helping developers and teams determine whether a project is legitimate or potentially risky.
 
 ## Key Features
-- **User-Friendly GUI**: Built with Tkinter for easy input and visualization.
 - **Risk Analysis**: Evaluates repositories based on metrics like stars, forks, commits, and contributors.
 - **Description Match Assessment**: Compares repository metadata with user-provided descriptions to detect inconsistencies.
 - **Recent Activity Tracking**: Displays the date of the last commit and checks for signs of abandonment.
