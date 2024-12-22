@@ -35,14 +35,6 @@ def analyze_github_repo(repo_url):
 
         return results
 
-    try:
-        keyword_occurrences = analyze_directory(api_url)
-        if keyword_occurrences:
-            return keyword_occurrences
-        else:
-            return f"No files found in the repository."
-    except Exception as e:
-        return f"An error occurred: {e}"
 
 # Function to get repository information
 def get_repo_info(repo_url):
