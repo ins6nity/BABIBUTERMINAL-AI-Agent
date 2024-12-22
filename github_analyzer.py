@@ -63,7 +63,8 @@ def get_repo_info(repo_url):
         "Last Updated": repo_info.get("updated_at", "N/A"),
         "Language": repo_info.get("language", "N/A"),
         "Description": repo_info.get("description", "N/A"),
-        "Last Commit": get_last_commit(repo_url)
+        "Last Commit": get_last_commit(repo_url),
+        "License": repo_info.get("license", {}).get("name", "N/A")
     }
     return info
 
