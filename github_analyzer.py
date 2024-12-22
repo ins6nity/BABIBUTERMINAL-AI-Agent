@@ -4,6 +4,8 @@ from tkinter.scrolledtext import ScrolledText
 import requests
 from concurrent.futures import ThreadPoolExecutor
 import re
+import json
+import os
 
 # Function to analyze the repository
 def analyze_github_repo(repo_url):
@@ -64,7 +66,8 @@ def get_repo_info(repo_url):
         "Language": repo_info.get("language", "N/A"),
         "Description": repo_info.get("description", "N/A"),
         "Last Commit": get_last_commit(repo_url),
-        "License": repo_info.get("license", {}).get("name", "N/A")
+        "License": repo_info.get("license", {}).get("name", "N/A"),
+        "Size (KB)": repo_info.get("size", 0)
     }
     return info
 
@@ -105,6 +108,14 @@ def get_open_issues(repo_url):
     response = requests.get(issues_url)
     return len(response.json()) if response.status_code == 200 else 0
 
+# Function to save logs
+def save_log(data):
+    """
+    Save logs to a JSON file.
+    """
+    with open("log.json", "w") as file:
+        json.dump(data, file, indent=4)
+
 # Tkinter UI Setup
 root = tk.Tk()
 root.title("GitHub Repository Analyzer")
@@ -130,6 +141,7 @@ def analyze_action():
         log_text.insert(tk.END, "Repository Information:\n")
         for key, value in repo_info.items():
             log_text.insert(tk.END, f"{key}: {value}\n")
+        save_log(repo_info)
     else:
         log_text.insert(tk.END, f"Error fetching repository information: {repo_info}\n\n")
 
