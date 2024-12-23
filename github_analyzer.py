@@ -11,6 +11,19 @@ def calculate_file_hash(file_path, hash_algorithm):
             hash_func.update(chunk)
     return hash_func.hexdigest()
 
+# Function to calculate hash for all files in a folder
+def calculate_folder_hash(folder_path, hash_algorithm):
+    results = []
+    for root, _, files in os.walk(folder_path):
+        for file in files:
+            file_path = os.path.join(root, file)
+            try:
+                file_hash = calculate_file_hash(file_path, hash_algorithm)
+                results.append((file, file_hash))
+            except Exception as e:
+                results.append((file, f"Error: {str(e)}"))
+    return results
+
 # Function to select a file and calculate its hash
 def select_file():
     file_path = filedialog.askopenfilename()
@@ -27,10 +40,26 @@ def select_file():
     except Exception as e:
         messagebox.showerror("Error", f"Failed to calculate hash: {str(e)}")
 
+# Function to select a folder and calculate hashes for all files
+def select_folder():
+    folder_path = filedialog.askdirectory()
+    if not folder_path:
+        return
+
+    hash_algorithm = hash_var.get()
+    try:
+        results = calculate_folder_hash(folder_path, hash_algorithm)
+        result_text.delete(1.0, tk.END)
+        result_text.insert(tk.END, f"Folder: {folder_path}\n\n")
+        for file, file_hash in results:
+            result_text.insert(tk.END, f"{file}: {file_hash}\n")
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to calculate folder hashes: {str(e)}")
+
 # GUI setup
 root = tk.Tk()
 root.title("File Hash Calculator")
-root.geometry("600x400")
+root.geometry("700x500")
 
 # Dropdown for hash algorithm selection
 hash_var = tk.StringVar(value="sha256")
@@ -44,8 +73,12 @@ hash_dropdown.pack(pady=5)
 select_button = tk.Button(root, text="Select File", command=select_file)
 select_button.pack(pady=10)
 
+# Button to select folder
+folder_button = tk.Button(root, text="Select Folder", command=select_folder)
+folder_button.pack(pady=10)
+
 # Text box to display results
-result_text = tk.Text(root, width=70, height=15)
+result_text = tk.Text(root, width=80, height=20)
 result_text.pack(pady=5)
 
 # Run the application
